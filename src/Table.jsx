@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { Bar } from 'react-chartjs-2';
 import { Chart, registerables } from 'chart.js';
+import { Link } from 'react-router-dom';
 Chart.register(...registerables);
 export default function Table() {
     const [customers, setCustomers] = useState([]);
@@ -60,7 +61,6 @@ export default function Table() {
                 transaction.customer_id == customerId
                 && transaction.amount.toString().includes(AmountFilter)
         );
-        // console.log(`Transactions for customer ID ${customerId}:`, customerTransactions);
         return customerTransactions;
     };
 
@@ -71,9 +71,9 @@ export default function Table() {
     return (
         <div className='max-w-screen-2xl mx-auto'>
             <div className="container mx-auto min-h-screen p-6 md:p-8 lg:p-12 xl:p-16">
-                <h1 className="text-4xl text-[#252422] pb-6 font-bold text-center">
-                    Customers
-                </h1>
+                <h2 className="text-4xl text-[#252422] pb-6 font-bold text-center">
+                    Our Customers
+                </h2>
                 <div className="flex justify-between items-center mb-4">
                     <div className="w-full flex flex-col md:flex-row justify-between gap-6 mx-auto">
                         <div className="md:w-[50%] w-full">
@@ -179,6 +179,9 @@ export default function Table() {
                                 <th scope="col" className="px-6 py-3 text-center text-[#fffcf2] text-sm md:text-[18px]">
                                     Agraph
                                 </th>
+                                <th scope="col" className="px-6 py-3 text-center text-[#fffcf2] text-sm md:text-[18px]">
+                                    AddTransaction
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -195,7 +198,10 @@ export default function Table() {
                                         <td className="px-6 text-center py-4">{transaction.date}</td>
                                         <td className="px-6 text-center py-4">{transaction.amount}</td>
                                         <td className="px-6 text-center py-4">
-                                            <button onClick={() => setDiagrameId(customer.id)} type="button" class="text-[#403d39] hover:text-white border border-[#403d39] hover:bg-[#403d39] focus:ring-4 focus:outline-none focus:ring-[#403d39] font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">Diagram</button>
+                                            <button onClick={() => setDiagrameId(customer.id)} type="button" className="transition-all duration-300 text-[#403d39] hover:text-white border border-[#403d39] hover:bg-[#403d39] focus:ring-4 focus:outline-none focus:ring-[#403d39] font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">Diagram</button>
+                                        </td>
+                                        <td className="px-6 text-center py-4">
+                                            <Link to={`Table/AddTransaction/${customer.id}/${transaction.id}`} className="transition-all duration-300 text-[#403d39] hover:text-white border border-[#403d39] hover:bg-[#403d39] focus:ring-4 focus:outline-none focus:ring-[#403d39] font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">AddTransaction</Link>
                                         </td>
                                     </tr>
                                 ));
