@@ -12,7 +12,8 @@ export default function AddCustomes() {
 
     async function addCustomer(newCustomer) {
         try {
-            const response = await fetch("http://localhost:3002/customers", {
+            //  كان شغال لما عملت localhost 
+            const response = await fetch("https://ziadalaa984.github.io/host_api/customers.json", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

@@ -1,30 +1,27 @@
 import React, { useEffect, useState } from 'react';
-
 import { Bar } from 'react-chartjs-2';
 import { Chart, registerables } from 'chart.js';
 import { Link } from 'react-router-dom';
 Chart.register(...registerables);
+
 export default function Table() {
     const [customers, setCustomers] = useState([]);
     const [transactions, setTransactions] = useState([]);
     const [nameFilter, setNameFilter] = useState("");
     const [AmountFilter, setAmountFilter] = useState("");
     const [chartData, setChartData] = useState({ labels: [], datasets: [] });
-    const [DiagrameId, setDiagrameId] = useState('')
+    const [DiagrameId, setDiagrameId] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const customersResponse = await fetch("http://localhost:3002/customers");
+                //  local host عشان يشتغل محتاج اشغل السيرفر
+                const customersResponse = await fetch("https://ziadalaa984.github.io/host_api/db.json");
                 const customersData = await customersResponse.json();
-                setCustomers(customersData);
-
-                const transactionsResponse = await fetch("http://localhost:3002/transactions");
-                const transactionsData = await transactionsResponse.json();
-                setTransactions(transactionsData);
-
+                setCustomers(customersData.customers);
+                setTransactions(customersData.transactions);
                 console.log("Customers Data:", customersData);
-                console.log("Transactions Data:", transactionsData);
+                console.log("Transactions Data:", transactions);
             } catch (error) {
                 console.error("Error fetching data:", error);
             }

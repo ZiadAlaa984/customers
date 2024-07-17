@@ -10,13 +10,15 @@ export default function AddTransaction() {
 
     async function addTransaction(newTransaction) {
         try {
-            const response = await fetch("http://localhost:3002/transactions", {
+            const response = await fetch("https://ziadalaa984.github.io/host_api/transaction.json", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(newTransaction)
             });
+
+            console.log('Response:', response); // Log the response
 
             if (response.ok) {
                 toast.success("Transaction added");
@@ -29,6 +31,7 @@ export default function AddTransaction() {
             console.error("Error adding transaction:", error);
         }
     }
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
